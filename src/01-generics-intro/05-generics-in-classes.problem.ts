@@ -1,14 +1,14 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
-export class Component {
-  private props: unknown;
+export class Component<T> {
+  private props: T;
 
-  constructor(props: unknown) {
+  constructor(props: T) {
     this.props = props;
   }
 
-  getProps = () => this.props;
+  getProps = (): T => this.props;
 }
 
 it("Should create an object containing props", () => {
@@ -19,6 +19,6 @@ it("Should create an object containing props", () => {
   expect(result).toEqual({ a: 1, b: 2, c: 3 });
 
   type tests = [
-    Expect<Equal<typeof result, { a: number; b: number; c: number }>>,
+    Expect<Equal<typeof result, { a: number; b: number; c: number }>>
   ];
 });
